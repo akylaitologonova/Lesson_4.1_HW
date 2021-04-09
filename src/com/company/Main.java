@@ -7,7 +7,7 @@ public class Main {
     public static String[] heroesNames = {"Lu Kang", "Jax", "Scorpion"};
     public static int[] heroesStrike = {20, 15, 25};
 
-    public static String Medic = "Medic";
+    public static String medicName = "Bairon";
     public static int medicHealth = 400;
     public static String toHealHeroes = "";
 
@@ -59,6 +59,12 @@ public class Main {
             }
         }
 
+        if (medicHealth<=0) {
+            System.out.println(medicName + "Medic dead");
+        }
+
+
+
         if (allHeroesDead) {
             System.out.println(bossName + "Won!!! Mortal Kombat finished");
         }
@@ -72,11 +78,12 @@ public class Main {
     }
 
     public static void setHeroesHealth() {
-        Random random = new Random();
-        int newHealth = random.nextInt(9) + 2;
+        Random randomM = new Random();
+        int newHealth = randomM.nextInt(9) + 2;
         for (int i = 0; i < heroesHealth.length; i++) {
             if (heroesHealth[i] < 100) {
-                heroesHealth = heroesHealth[i] + newHealth;
+                heroesHealth[i] += newHealth;
+                break;
 
             }
         }
@@ -109,9 +116,20 @@ public class Main {
         for (int i = 0; i < heroesHealth.length; i++) {
             if (heroesHealth[i] > 0 && bossHealth > 0) {
                 heroesHealth[i] = heroesHealth[i] - bossStrike;
-            }
+
+                }
+
             if (heroesHealth[i] < 0) {
                 heroesHealth[i] = 0;
+
+            }
+
+            if (medicHealth > 0 ){
+                medicHealth=medicHealth-bossStrike;
+
+                if (medicHealth<0){
+                    medicHealth=0;
+                }
 
             }
 
@@ -129,7 +147,7 @@ public class Main {
         for (int i = 0; i < heroesNames.length; i++) {
             System.out.println(heroesNames[i] + "=" + heroesHealth[i] + " " + "strike [" +
                     heroesStrike[i] + "]");
-
+            System.out.println(medicName + "=" + medicHealth );
         }
     }
 
